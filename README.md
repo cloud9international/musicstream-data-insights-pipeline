@@ -17,5 +17,12 @@ Sobre el repositorio:
 - avisar siempre que se actualize algo para que las demás hagan un 'pull' antes de nada
 
 
+Horarios después de clase:
+- ser flexibles con los horarios para poder adaptar a todas
+- dividir las tareas entre todas para poder avanzar sin necesidad de reunirnos siempre en directo
+
+
+
+
 
 
