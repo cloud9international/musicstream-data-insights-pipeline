@@ -1,4 +1,4 @@
-ID,name,artist,Year,Genero,album_type,release_date,popularity
+id,track_name,artist_name,year,genre,album_type,release_date,popularity
 1WHNqqRWhJVZIdCScFKtl5,Washington on Your Side,Leslie Odom Jr.,2015,soundtrack,album,9/25/2015,67
 1llkMtLL4vbe0pr3NV2ckg,Let Me Hear,"Fear, and Loathing in Las Vegas",2015,soundtrack,album,9/30/2015,58
 39IOkz6LpC1qc5Wnt0T07r,Dance of the Druids (feat. Raya Yarbrough),Bear McCreary,2015,soundtrack,album,2/10/2015,53
