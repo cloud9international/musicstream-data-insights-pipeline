@@ -1,6 +1,6 @@
-
 -- QUERIES FOR MUSICSTREAM PROJECT
 
+USE musicstream_team_2;
 
 SELECT *
 	FROM spotify;
