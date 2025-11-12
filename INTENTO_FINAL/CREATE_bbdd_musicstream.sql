@@ -1,8 +1,8 @@
--- DROP SCHEMA IF EXISTS musicstream_team_2;
+-- DROP SCHEMA IF EXISTS musicstream;
 
-CREATE SCHEMA musicstream_team_2;
+CREATE SCHEMA musicstream;
 
-USE musicstream_team_2;
+USE musicstream;
 
 -- TABLE 1
 CREATE TABLE spotify (	
@@ -12,7 +12,7 @@ CREATE TABLE spotify (
     `year` YEAR,   											-- backticks para que se reconociera como identificador (comillas no)
     genre ENUM('soundtrack', 'k-pop', 'afro', 'electronic'),
     album_type VARCHAR(45),
-    release_date DATE,										-- python se convierte fecha de csv de USA a YYYY-MM-DD
+    release_date DATE,									
     popularity INT
 	);
 
