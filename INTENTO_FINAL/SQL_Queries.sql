@@ -173,11 +173,12 @@ SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad
 
 
 -- 6.Los similar artists más recomendados (más repetidos - LastFM)
-SELECT COUNT(DISTINCT similar_artists)
-	FROM lastfm;
-
-
-
+SELECT s.genre, l.similar_artists, COUNT(l.similar_artists) AS Repeticiones
+FROM lastfm AS l
+INNER JOIN spotify AS s
+	ON l.artist_name = s.artist_name
+GROUP BY l.similar_artists, s.genre
+ORDER BY Repeticiones DESC;
 
 
 
