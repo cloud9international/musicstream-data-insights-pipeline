@@ -171,12 +171,41 @@ SELECT * FROM (SELECT s.genre AS Genero, s.year AS Año, SUM(l.playcount) AS Rep
 
 
 -- 5.Los similar artists más recomendados (más repetidos - LastFM)
-SELECT s.genre, l.similar_artists, COUNT(l.similar_artists) AS Repeticiones
-FROM lastfm AS l
-INNER JOIN spotify AS s
-	ON l.artist_name = s.artist_name
-GROUP BY l.similar_artists, s.genre
-ORDER BY Repeticiones DESC;
+SELECT * FROM (SELECT s.genre, l.similar_artists, COUNT(l.similar_artists) AS Repeticiones
+				FROM lastfm AS l
+				INNER JOIN spotify AS s
+					ON l.artist_name = s.artist_name
+				WHERE genre = 'electronic'
+				GROUP BY l.similar_artists, s.genre
+				ORDER BY Repeticiones DESC
+				LIMIT 1) AS electronic
 
+UNION ALL
+SELECT * FROM (SELECT s.genre, l.similar_artists, COUNT(l.similar_artists) AS Repeticiones
+				FROM lastfm AS l
+				INNER JOIN spotify AS s
+					ON l.artist_name = s.artist_name
+				WHERE genre = 'afro'
+				GROUP BY l.similar_artists, s.genre
+				ORDER BY Repeticiones DESC
+				LIMIT 1) AS afro
 
+UNION ALL
+SELECT * FROM (SELECT s.genre, l.similar_artists, COUNT(l.similar_artists) AS Repeticiones
+				FROM lastfm AS l
+				INNER JOIN spotify AS s
+					ON l.artist_name = s.artist_name
+				WHERE genre = 'soundtrack'
+				GROUP BY l.similar_artists, s.genre
+				ORDER BY Repeticiones DESC
+				LIMIT 1) AS soundtrack
 
+UNION ALL
+SELECT * FROM (SELECT s.genre, l.similar_artists, COUNT(l.similar_artists) AS Repeticiones
+				FROM lastfm AS l
+				INNER JOIN spotify AS s
+					ON l.artist_name = s.artist_name
+				WHERE genre = 'k-pop'
+				GROUP BY l.similar_artists, s.genre
+				ORDER BY Repeticiones DESC
+				LIMIT 1) AS kpop;
