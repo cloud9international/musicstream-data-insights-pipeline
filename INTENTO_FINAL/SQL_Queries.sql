@@ -48,24 +48,28 @@ SELECT * FROM (SELECT DISTINCT l.artist_name, l.playcount, s.genre AS Genero
 SELECT * FROM (SELECT track_name AS Cancion, release_date AS Lanzamiento, genre AS Genero
 					FROM spotify
 					WHERE genre = 'electronic'
+                    ORDER BY popularity DESC
 					LIMIT 5) AS electronic
 
 UNION ALL
 SELECT * FROM (SELECT track_name AS Cancion, release_date AS Lanzamiento, genre AS Genero
 					FROM spotify
 					WHERE genre = 'afro'
+                    ORDER BY popularity DESC
 					LIMIT 5) AS afro
 
 UNION ALL
 SELECT * FROM (SELECT track_name AS Cancion, release_date AS Lanzamiento, genre AS Genero
 					FROM spotify
 					WHERE genre = 'soundtrack'
+                    ORDER BY popularity DESC
 					LIMIT 5) AS soundtrack
 
 UNION ALL
 SELECT * FROM (SELECT track_name AS Cancion, release_date AS Lanzamiento, genre AS Genero
 					FROM spotify
 					WHERE genre = 'k-pop'
+                    ORDER BY popularity DESC
 					LIMIT 5) AS kpop;
 
 
@@ -165,14 +169,8 @@ SELECT * FROM (SELECT s.genre AS Genero, s.year AS Año, SUM(l.playcount) AS Rep
 
 
 
--- 5.Promedio de popularidad de los generos musicales en Spotify entre 2015 y 2019?
-SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad
-					FROM spotify AS s
-					GROUP BY s.genre
-					ORDER BY AVG(s.popularity) DESC;
 
-
--- 6.Los similar artists más recomendados (más repetidos - LastFM)
+-- 5.Los similar artists más recomendados (más repetidos - LastFM)
 SELECT s.genre, l.similar_artists, COUNT(l.similar_artists) AS Repeticiones
 FROM lastfm AS l
 INNER JOIN spotify AS s
