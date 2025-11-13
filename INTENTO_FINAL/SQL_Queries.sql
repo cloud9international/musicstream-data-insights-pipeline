@@ -182,9 +182,3 @@ ORDER BY Repeticiones DESC;
 
 
 
-
-
--- X. ¿Cuál es el artista (artist_name) y el género (genre) para la canción menos popular (popularity) de la base de datos?
-
-
-
