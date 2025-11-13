@@ -28,7 +28,7 @@ En resumen, Musicstream transforma montones de datos crudos en inteligencia de n
 Tener instalado una versión actualizada de Python 3.x.
 posicionarse en la terminal en la carpeta donde hayas dedicido que irá la Repo del proyecto.
 Clonar el repositorio (si está en GitHub):
-git clone https://github.com/Maykaduran/proyecto-da-promo-60-modulo-1-team-3.git
+git clone https://github.com/ariana-caldeira/proyecto-DA-promo-60-modulo-2-team-2.git
 Buscar y ejecutar diferentes archivos:
 
 1. MusicStream_Spotify_Extraccion.ipynb (con este archivo crearemos un documento en formato .csv que necesitaremos en el punto 2 y 4)
