@@ -7,7 +7,7 @@ USE musicstream;
 
 
 -- 1.TOP 5 Artistas más reproducidos por cada genero musical (LastFM)
-SELECT * FROM (SELECT DISTINCT l.artist_name AS Artista, s.genre AS Genero, l.playcount AS Reproducciones
+SELECT * FROM (SELECT DISTINCT l.artist_name AS Artista, l.playcount AS Reproducciones, s.genre AS Genero
 					FROM lastfm AS l
 					INNER JOIN spotify AS s
 						ON l.artist_name = s.artist_name
@@ -16,7 +16,7 @@ SELECT * FROM (SELECT DISTINCT l.artist_name AS Artista, s.genre AS Genero, l.pl
 					LIMIT 5) AS electronic
 
 UNION ALL
-SELECT * FROM (SELECT DISTINCT l.artist_name, s.genre, l.playcount
+SELECT * FROM (SELECT DISTINCT l.artist_name, l.playcount, s.genre AS Genero
 					FROM lastfm AS l
 					INNER JOIN spotify AS s
 						ON l.artist_name = s.artist_name
@@ -25,7 +25,7 @@ SELECT * FROM (SELECT DISTINCT l.artist_name, s.genre, l.playcount
 					LIMIT 5) AS afro
 
 UNION ALL
-SELECT * FROM (SELECT DISTINCT l.artist_name, s.genre, l.playcount
+SELECT * FROM (SELECT DISTINCT l.artist_name, l.playcount, s.genre AS Genero
 					FROM lastfm AS l
 					INNER JOIN spotify AS s
 						ON l.artist_name = s.artist_name
@@ -34,7 +34,7 @@ SELECT * FROM (SELECT DISTINCT l.artist_name, s.genre, l.playcount
 					LIMIT 5) AS soundtrack
                     
 UNION ALL
-SELECT * FROM (SELECT DISTINCT l.artist_name, s.genre, l.playcount
+SELECT * FROM (SELECT DISTINCT l.artist_name, l.playcount, s.genre AS Genero
 					FROM lastfm AS l
 					INNER JOIN spotify AS s
 						ON l.artist_name = s.artist_name
@@ -71,14 +71,14 @@ SELECT * FROM (SELECT track_name AS Cancion, release_date AS Lanzamiento, genre 
 
 
 
--- 3. TOP 5 Artistas con más canciones lanzadas por genero musical? (Spotify + LastFM)
+-- 3. TOP Artistas con más canciones lanzadas por genero musical? (Spotify + LastFM)
 -- spotify: artist_name, genre, 
 SELECT * FROM (SELECT artist_name AS Artista, COUNT(artist_name) AS Total_Canciones, genre AS Genero
 					FROM spotify
 					WHERE genre = 'afro'
 					GROUP BY artist_name, genre
 					ORDER BY Total_Canciones DESC
-					LIMIT 5 ) AS afro
+					LIMIT 1 ) AS afro
 
 UNION ALL
 SELECT * FROM (SELECT artist_name AS Artista, COUNT(artist_name) AS Total_Canciones, genre AS Genero
@@ -86,7 +86,7 @@ SELECT * FROM (SELECT artist_name AS Artista, COUNT(artist_name) AS Total_Cancio
 				WHERE genre = 'k-pop'
 				GROUP BY artist_name, genre
 				ORDER BY Total_Canciones DESC
-				LIMIT 5 ) AS kpop
+				LIMIT 1 ) AS kpop
                 
 UNION ALL
 SELECT * FROM (SELECT artist_name AS Artista, COUNT(artist_name) AS Total_Canciones, genre AS Genero
@@ -94,7 +94,7 @@ SELECT * FROM (SELECT artist_name AS Artista, COUNT(artist_name) AS Total_Cancio
 					WHERE genre = 'electronic'
 					GROUP BY artist_name, genre
 					ORDER BY Total_Canciones DESC
-					LIMIT 5 ) AS electronic
+					LIMIT 1 ) AS electronic
 
 UNION ALL
 SELECT * FROM (SELECT artist_name AS Artista, COUNT(artist_name) AS Total_Canciones, genre AS Genero
@@ -102,7 +102,7 @@ SELECT * FROM (SELECT artist_name AS Artista, COUNT(artist_name) AS Total_Cancio
 					WHERE genre = 'soundtrack'
 					GROUP BY artist_name, genre
 					ORDER BY Total_Canciones DESC
-					LIMIT 5 ) AS soundtrack;
+					LIMIT 1 ) AS soundtrack;
 
 
 -- 4. ¿Cuál es el genero musical más reproducido entre 2015 y 2019? (Comparativa por años)
@@ -170,40 +170,6 @@ SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad
 					FROM spotify AS s
 					GROUP BY s.genre
 					ORDER BY AVG(s.popularity) DESC;
-                    
-SELECT * FROM (SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad, s.year AS Año
-					FROM spotify AS s
-					WHERE s.year = '2015'
-					GROUP BY s.genre
-					ORDER BY AVG(s.popularity) DESC) AS dosmil15
-
-UNION ALL
-SELECT * FROM (SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad, s.year AS Año
-					FROM spotify AS s
-					WHERE s.year = '2016'
-					GROUP BY s.genre
-					ORDER BY AVG(s.popularity) DESC) AS dosmil16
-
-UNION ALL
-SELECT * FROM (SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad, s.year AS Año
-					FROM spotify AS s
-					WHERE s.year = '2017'
-					GROUP BY s.genre
-					ORDER BY AVG(s.popularity) DESC) AS dosmil17
-
-UNION ALL
-SELECT * FROM (SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad, s.year AS Año
-					FROM spotify AS s
-					WHERE s.year = '2018'
-					GROUP BY s.genre
-					ORDER BY AVG(s.popularity) DESC) AS dosmil18
-
-UNION ALL
-SELECT * FROM (SELECT s.genre AS Genero, AVG(s.popularity) AS Popularidad, s.year AS Año
-					FROM spotify AS s
-					WHERE s.year = '2019'
-					GROUP BY s.genre
-					ORDER BY AVG(s.popularity) DESC) AS dosmil19;
 
 
 -- 6.Los similar artists más recomendados (más repetidos - LastFM)
