@@ -15,3 +15,6 @@ venv/
 # Data (keep small CSVs you already have)
 # data/raw/
 # data/interim/
+
+# Cache
+.cache/

@@ -1,67 +1,212 @@
-# Proyecto_modulo2_E2
+# 🎵 MusicStream Project – Unified Music Popularity Analysis  
+*(Proyecto MusicStream – Análisis de Popularidad Musical)*
 
-# Qué hace el proyecto.
+## Project Overview (Resumen del Proyecto)
 
-Musicstream: La Plataforma Unificada de Análisis Musical
+MusicStream is a data analytics project designed to consolidate fragmented music data from multiple platforms in order to better understand trends in artist popularity, song performance, and genre evolution.
 
-Musicstream es una herramienta analítica de vanguardia diseñada para superar el desafío fundamental de la industria musical: la fragmentación de los datos. Hoy en día, la información valiosa sobre el engagement de los artistas se encuentra dispersa en múltiples plataformas (servicios de streaming, redes sociales, tiendas de música y catálogos de metadata). Esta separación hace que sea extremadamente difícil para los sellos discográficos, managers y analistas de tendencias obtener una visión holística y accionable del rendimiento de un artista o una canción.
+The project integrates data extracted from:
 
-Musicstream resuelve este problema consolidando y combinando datos de estas fuentes dispares en una única base de datos centralizada y optimizada.
+- Spotify API (songs, genres, release dates, popularity metrics)  
+- Last.fm API (artist biographies, listener statistics, play counts, and similar artists)
+
+All data is cleaned, normalized, and stored in a relational MySQL database, enabling structured analysis through SQL queries.
+
+This project was developed as an academic exercise to strengthen skills in Python, SQL, data pipelines, and collaborative version control.
+
+---
+
+## Objectives (Objetivos)
+
+- Apply Python and SQL in an end-to-end data pipeline  
+- Extract and process data using external APIs  
+- Design a relational database with referential integrity  
+- Automate data insertion workflows  
+- Perform analytical SQL queries  
+- Practice collaborative development using Git and GitHub  
+
+---
+
+## Technologies Used (Tecnologías Utilizadas)
+
+- Python (Pandas, Requests, Spotipy, MySQL Connector)  
+- Spotify Web API  
+- Last.fm API  
+- MySQL  
+- Jupyter Notebooks  
+- Git & GitHub  
+
+---
+
+## Project Structure (Estructura del Proyecto)
+
+```
+project/
+├── Jupyter notebooks (.ipynb) – data extraction and processing
+├── CSV files (.csv) – processed datasets
+├── SQL files (.sql) – database creation and queries
+└── PDF file (.pdf) – final presentation
+
+README.md
+.gitignore
+```
 
 
-# Por qué el proyecto es útil.
+---
 
-Utilizamos SQL para ingerir, limpiar y normalizar los datos. Esta información unificada es luego expuesta a través de una API flexible y un panel de control interactivo.
+## How to Run the Project (Cómo Ejecutar el Proyecto)
 
-Nuestro valor radica en la capacidad de generar Insights Cruzados que revelan correlaciones y tendencias invisibles en los datos aislados.
+Run the files in the following order:
 
-Por ejemplo, Musicstream puede identificar:
+### 1️⃣ Spotify Data Extraction (Extracción Spotify)  
+**musicstream-spotify-extraccion.ipynb**
 
-Cuales son los artistas más escuchados y valorados en diferentes periodos.
+- Extracts song data by genre and year  
+- Generates: `canciones-spotify.csv`
 
-Como un genero de música puede destacar más que otro en fechas concretas.
+---
 
-En resumen, Musicstream transforma montones de datos crudos en inteligencia de negocio estratégica y en tiempo real, impulsando decisiones más informadas en la promoción, contratación y distribución musical.
+### 2️⃣ Last.fm Data Enrichment (Extracción Last.fm)  
+**musicstream-lastfm-extraccion.ipynb**
 
-# Cómo pueden comenzar los usuarios con el proyecto.
+- Retrieves artist biographies, listeners, play counts, and similar artists  
+- Generates: `artistas-lastfm.csv`
 
-Tener instalado una versión actualizada de Python 3.x.
-posicionarse en la terminal en la carpeta donde hayas dedicido que irá la Repo del proyecto.
-Clonar el repositorio (si está en GitHub):
-git clone https://github.com/ariana-caldeira/proyecto-DA-promo-60-modulo-2-team-2.git
-Buscar y ejecutar diferentes archivos:
+---
 
-1. MusicStream_Spotify_Extraccion.ipynb (con este archivo crearemos un documento en formato .csv que necesitaremos en el punto 2 y 4)
-2. MusicStream_LastFM_Extraccion.ipynb (con este archivo crearemos un documento en formato .csv que necesitaremos en el punto 4)
-3. CREATE_bbdd_musicstream.sql
-4. Insert_to_SQL.ipynb
+### 3️⃣ Database Creation (Creación de Base de Datos)  
+**create-bbdd-musicstream.sql**
 
-# Dónde pueden recibir ayuda los usuarios con tu proyecto.
+- Creates the `musicstream` schema  
+- Builds the `lastfm` and `spotify` tables with primary and foreign keys  
 
-Si tienes problemas, encuentras un error o tienes alguna pregunta:
+---
 
-Reporte de Problemas: Abre un Issue en el repositorio de GitHub con una descripción detallada del problema, esto se implementará en el tablón del proyecto y se le asignará una prioridad de tratamiento y una persona del equipo para que lo resuelva.
+### 4️⃣ Data Insertion (Inserción de Datos)  
+**insert-to-sql.ipynb**
 
-# Quién mantiene y contribuye con el proyecto.
+- Cleans null values  
+- Fixes date formats  
+- Prevents duplicate inserts (idempotent process)  
+- Loads data into MySQL  
 
-El proyecto es mantenido actualmente por:
+---
 
-[ariana-caldeira / Ariana Caldeira]
-[Maykaduran / Mayka Durán]
-[cloud9international / Claudia Cervantes]
-[mirianika191-stack / Miriam Marcos]
-[giselabagu / Gisela Barroso]
+### 5️⃣ Analytical Queries (Consultas SQL)  
+**sql-queries.sql**
 
-# Añadir librerías y recursos usados, instalaciones externas necesarias (si procede), etc.
+Used to answer questions such as:
 
-Se necesita Python con las siguientes importaciones e instalaciones:
+- Artists with the most songs  
+- Most popular genres  
+- Years with highest releases  
+- Top-rated songs  
+- Artist popularity trends  
 
-- import spotipy
-- from spotipy.oauth2 import SpotifyClientCredentials
-- import pandas as pd
-- import time
-- import requests, time, re, html
-- from io import BytesIO
-- import mysql.connector
-- from mysql.connector import errorcode
+---
 
+## Key Insights (Hallazgos Clave)
+
+- Popularity metrics (play counts and listeners) do not always correlate with higher qualitative ratings, suggesting that exposure and algorithm-driven promotion influence perceived success more than user preference alone.
+
+- Spotify genre tagging can introduce classification bias. For example, the "K-pop" category included a significant number of artists and tracks unrelated to the genre, affecting genre-based analysis.
+
+- High play counts tend to favor mainstream or heavily promoted artists, highlighting potential algorithmic reinforcement rather than organic popularity.
+
+- Integrating multiple data sources (Spotify and Last.fm) provided a more balanced perspective than relying on a single platform.
+
+- These findings highlight the importance of data validation and multi-source integration when analyzing platform-driven metrics.
+---
+
+## Database Design (Diseño de la Base de Datos)
+
+### Table: `lastfm`
+
+| Field | Description |
+|------|------------|
+| artist_name | Primary key |
+| biography | Artist biography |
+| listeners | Number of listeners |
+| playcount | Total play count |
+| similar_artists | Related artists |
+
+---
+
+### Table: `spotify`
+
+| Field | Description |
+|------|------------|
+| id | Primary key |
+| track_name | Song name |
+| artist_name | Foreign key to lastfm |
+| year | Release year |
+| genre | Music genre |
+| album_type | Album type |
+| release_date | Full release date |
+| popularity | Popularity score |
+
+---
+
+## Environment Variables (Variables de Entorno)
+
+API credentials and database access are managed securely using a `.env` file, which is excluded from version control:
+
+```
+SPOTIFY_CLIENT_ID=xxxx
+SPOTIFY_CLIENT_SECRET=xxxx
+LASTFM_API_KEY=xxxx
+LASTFM_SECRET_KEY=xxxx
+
+MYSQL_USER=xxxx
+MYSQL_PASSWORD=xxxx
+MYSQL_HOST=localhost
+MYSQL_DATABASE=musicstream
+```
+
+
+---
+
+## Team & Credits (Equipo y Créditos)
+
+This project was originally developed as a collaborative course project by:
+
+- Gisela Barroso — https://github.com/giselabagu  
+- Ariana Caldeira — https://github.com/ariana-caldeira  
+- Claudia Cervantes — https://github.com/cloud9international  
+- Mayka Durán — https://github.com/Maykaduran  
+- Miriam Marcos — https://github.com/mirianika191-stack  
+
+Original team repository:  
+https://github.com/ariana-caldeira/proyecto-DA-promo-60-modulo-2-team-2  
+
+This repository is a curated portfolio version maintained by **Claudia Cervantes**.
+
+---
+
+## Working Methodology (Metodología de Trabajo)
+
+- Agile sprint-based workflow  
+- Task distribution across pipeline phases  
+- Continuous version control using GitHub  
+- Data validation and iterative improvements  
+
+---
+
+## Delivery (Entrega)
+
+The final project repository includes:
+
+- Data extraction code  
+- SQL schema and queries  
+- Processed datasets  
+- Documentation  
+- Presentation materials  
+
+---
+
+## Final Notes (Notas Finales)
+
+- Data extraction is performed using controlled samples  
+- The pipeline is fully reproducible  
+- SQL insertion is idempotent (no duplicates on re-runs)  
+- The project simulates a real-world multi-source data integration workflow  
